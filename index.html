@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnix - Collaborative Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body >
+    <!-- Login Page -->
+    <div id="loginPage" class="login-page">
+        <div class="login-container">
+            <div class="login-card card">
+                <div class="login-header">
+                    <h1>Learnix</h1>
+                    <p>Collaborative Learning Platform</p>
+                </div>
+                <button id="googleLoginBtn" class="btn btn--primary btn--full-width">
+                    <span class="google-icon">📧</span>
+                    Sign in with Google
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard" class="dashboard hidden">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <h1>Learnix</h1>
+                    <div class="user-info">
+                        <span id="userAvatar" class="user-avatar">👤</span>
+                        <span id="userName" class="user-name">User Name</span>
+                        <button id="logoutBtn" class="btn btn--secondary btn--sm">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="dashboard-actions">
+                    <button id="createSessionBtn" class="btn btn--primary btn--lg">Create Session</button>
+                    <button id="mySessionsBtn" class="btn btn--outline btn--lg">My Sessions</button>
+                </div>
+
+                <!-- Sessions List -->
+                <div id="sessionsList" class="sessions-list hidden">
+                    <div class="sessions-header">
+                        <h2>My Sessions</h2>
+                        <button id="backToDashboard" class="btn btn--secondary">Back to Dashboard</button>
+                    </div>
+                    <div id="sessionsContainer" class="sessions-container">
+                        <!-- Sessions will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Session Modal -->
+    <div id="createSessionModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Session</h2>
+                <button id="closeCreateModal" class="modal-close">&times;</button>
+            </div>
+            <form id="createSessionForm" class="modal-body">
+                <div class="form-group">
+                    <label class="form-label" for="sessionName">Session Name</label>
+                    <input type="text" id="sessionName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="scheduleTime">Schedule Time</label>
+                    <input type="datetime-local" id="scheduleTime" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="learningLink">Learning Link</label>
+                    <input type="url" id="learningLink" class="form-control" placeholder="https://example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Add Friends</label>
+                    <div id="friendsList" class="friends-list">
+                        <!-- Friends will be populated here -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Key Milestones</label>
+                    <div class="milestones-container">
+                        <div id="milestonesList" class="milestones-list">
+                            <!-- Milestones will be populated here -->
+                        </div>
+                        <div class="milestone-input-group">
+                            <input type="text" id="newMilestone" class="form-control" placeholder="Enter milestone">
+                            <button type="button" id="addMilestoneBtn" class="btn btn--secondary">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" id="cancelCreate" class="btn btn--outline">Cancel</button>
+                <button type="submit" form="createSessionForm" class="btn btn--primary">Create Session</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Session Interface -->
+    <div id="activeSession" class="active-session hidden">
+        <header class="session-header">
+            <div class="container">
+                <div class="session-header-content">
+                    <div class="session-info">
+                        <h1 id="activeSessionName">Session Name</h1>
+                        <a id="activeLearningLink" href="#" target="_blank" class="learning-link btn btn--primary">
+                            Open Learning Resource
+                        </a>
+                    </div>
+                    <div class="session-actions">
+                        <button id="takeBreakBtn" class="btn btn--secondary">Take Break</button>
+                        <button id="endSessionBtn" class="btn btn--outline" disabled>End Session</button>
+                        <button id="leaveSessionBtn" class="btn btn--outline">Leave Session</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="session-content">
+            <div class="container">
+                <div class="session-layout">
+                    <div class="milestones-section">
+                        <h2>Key Milestones</h2>
+                        <div id="activeMilestones" class="active-milestones">
+                            <!-- Active milestones will be populated here -->
+                        </div>
+                    </div>
+                    <div class="participants-section">
+                        <h2>Participants</h2>
+                        <div id="participantsList" class="participants-list">
+                            <!-- Participants will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Milestone Learning Modal -->
+    <div id="milestoneModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="milestoneModalTitle">Enter Key Learnings</h2>
+                <button id="closeMilestoneModal" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label" for="keyLearnings">What did you learn from this milestone?</label>
+                    <textarea id="keyLearnings" class="form-control" rows="4" required 
+                              placeholder="Describe your key learnings..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancelMilestone" class="btn btn--outline">Cancel</button>
+                <button type="button" id="submitMilestone" class="btn btn--primary">Complete Milestone</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
